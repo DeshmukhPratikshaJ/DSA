@@ -35,7 +35,7 @@ public class MyLinkedList<T> {
 	public boolean insertIntoLL(T data,int position) {
         Node newNode=new Node<T>(data);
         
-        if(position>1 && head==null) {
+        if(position<=0||(position>1 && head==null)) {
         	System.out.println("cannot insert");
         	return false;
         }
@@ -87,9 +87,14 @@ public class MyLinkedList<T> {
 	//delete from ith position
 	public boolean deleteFromIthposition(int position)
 	{
-		if(head==null) {
-			System.out.println("LL is empty");
+		if(head==null || position<=0) {
+			System.out.println("can't delete");
 			return false;
+		}
+		if(position==1) {
+			System.out.println("element to delete:"+head.getData());
+			head=head.getNext();
+			System.out.println("new head:"+head.getData());
 		}
 		Node prev=head;
 		for(int i=1;i<position-1;i++) {
@@ -99,6 +104,8 @@ public class MyLinkedList<T> {
 				return false;
 		}
 		Node ith=prev.getNext();
+		System.out.println("previous node:"+prev.getData());
+		System.out.println("element of deletion:"+ith.getData());
 		prev.setNext(ith.getNext());
 		return true;
 	}
